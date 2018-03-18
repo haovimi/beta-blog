@@ -1,0 +1,17 @@
+<h1> Create an article </h1>
+
+<%= form_for @article do |f| %>
+<!-- sau khi viet dong nay, phai tao them @article = Article.new trong phuong thuc "new" trong controller -->
+    <p>
+      <%= f.label :title %> <br/>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :description %> <br/>
+      <%= f.text_area :description %>
+    </p>
+    <p>
+      <%= f.submit 'Submit' %>
+    </p>
+<% end %>
+<!-- sau khi viet toi day, phai def hanh dong "create" trong controller -->
