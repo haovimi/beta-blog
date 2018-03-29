@@ -1,14 +1,42 @@
 class ArticlesController < ApplicationController
+  def index
+    @allarticles = Article.all
+  end
 
   def new
     @article = Article.new
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
   def create
     #render plain: params[:article].inspect ##nếu chỉ muốn display những gì submit
     @article = Article.new(article_params) #we need to WHITELIST the values of article
-    @article.save
-    redirect_to articles_show(@article) #dòng này nhập sau khi đã viết dòng tạo permit cho params (trong file này luôn, dòng 16)
+    if @article.save
+      flash[:notice] = "Article was successfully created"
+      redirect_to article_path(@article)
+    else
+      render 'new' #render nhung gi da tao
+    end
+    #@article.save
+    #redirect_to articles_path(@article) #dòng này nhập sau khi đã viết dòng tạo permit cho params (trong file này luôn, dòng 16)
+
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    if @article = Article.update(article_params)
+      flash[:notice] = "Article was successfully updated"
+      redirect_to article_path(@article)
+    else
+      render 'edit'
+    end
+  end
+
+  def show
+    @article = Article.find(params[:id])
   end
 
   private
