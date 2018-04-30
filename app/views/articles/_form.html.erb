@@ -1,0 +1,23 @@
+<% if @article.errors.any? %>
+<h2> There's an error in the input data </h2>
+  <ul>
+  <% @article.errors.full_messages.each do |msg| %>
+  <li> <%= msg %> </li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @article do |f| %>
+<!-- sau khi viet dong nay, phai tao them @article = Article.new trong phuong thuc "new" trong controller -->
+    <p>
+      <%= f.label :title %> <br/>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :description %> <br/>
+      <%= f.text_area :description %>
+    </p>
+    <p>
+      <%= f.submit 'Submit' %>
+    </p>
+<% end %>
